@@ -26,7 +26,7 @@ RUN . /home/cardano/.nix-profile/etc/profile.d/nix.sh && nix-build -A connectScr
 EXPOSE 8090
 
 # build the explorer node runnable
-RUN . /home/cardano/.nix-profile/etc/profile.d/nix.sh && nix-build -A cardano-sl-explorer-static -o cardano-sl-explorer-static
+RUN . /home/cardano/.nix-profile/etc/profile.d/nix.sh && nix-build -A connectScripts.mainnetExplorer -o connect-explorer-to-mainnet
 EXPOSE 8100
 
 # This makes the wallet bind to the container interface that is then mapped through to the host
