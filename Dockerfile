@@ -21,14 +21,3 @@ RUN git clone https://github.com/input-output-hk/cardano-sl.git
 WORKDIR cardano-sl
 RUN git checkout debc5a846cda872fcdc3e21a0d893672c1bb109c #April 30, 2018. API v1 beta.
 
-# build the settlement layer node runnable
-RUN . /home/cardano/.nix-profile/etc/profile.d/nix.sh && nix-build -A connectScripts.mainnetWallet -o connect-to-mainnet
-EXPOSE 8090
-
-# build the explorer node runnable
-RUN . /home/cardano/.nix-profile/etc/profile.d/nix.sh && nix-build -A connectScripts.mainnetExplorer -o connect-explorer-to-mainnet
-EXPOSE 8100
-
-# This makes the wallet bind to the container interface that is then mapped through to the host
-RUN sed -ur -i 's/--wallet-address 127.0.0.1/--wallet-address 0.0.0.0/' connect-to-mainnet
-
